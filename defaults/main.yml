@@ -29,4 +29,7 @@ ruby_user_gems: []
 # @end
 ruby_global_gems: []
 
+# @var ruby_gem_executable:description: Path to ruby gem executable
+ruby_gem_executable: /usr/bin/gem
+
 ...

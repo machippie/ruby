@@ -22,6 +22,7 @@
   loop_control:
     label: "{{ item.name | default(item) }}"
   gem:
+    executable: "{{ item.executable | default(ruby_gem_executable) | default(omit) }}"
     name: "{{ item.name | default(item) }}"
     version: "{{ item.version | default(omit) }}"
     pre_release: "{{ item.pre_release | default(False) }}"
@@ -37,6 +38,7 @@
   loop_control:
     label: "{{ item.name | default(item) }}"
   gem:
+    executable: "{{ item.executable | default(ruby_gem_executable) | default(omit) }}"
     name: "{{ item.name | default(item) }}"
     version: "{{ item.version | default(omit) }}"
     pre_release: "{{ item.pre_release | default(False) }}"
