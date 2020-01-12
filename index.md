@@ -1,6 +1,16 @@
 
 ## Default Variables
 
+### ruby_gem_executable
+
+Path to ruby gem executable
+
+#### Default value
+
+```yaml
+ruby_gem_executable: /usr/bin/gem
+```
+
 ### ruby_global_gems
 
 List of gems to install system-wide
