@@ -1,0 +1,32 @@
+# Standards: 0.1
+---
+# @var ruby_user:description: User to run user-specific commands
+# @var ruby_user:value: ruby_user | default(homebrew_user) | default(ansible_user_id)
+# ruby_user:
+
+# @var ruby_install:description: Install ruby via homebrew
+ruby_install: False
+
+# @var ruby_user_gems:description: List of gems to install for an user
+# @var ruby_user_gems:example: >
+# ruby_user_gems:
+#   - gemname1
+#   - name: gemname1
+#     verison: 1.0.0
+#     pre_release: False
+#     state: latest
+# @end
+ruby_user_gems: []
+
+# @var ruby_global_gems:description: List of gems to install system-wide
+# @var ruby_global_gems:example: >
+# ruby_user_gems:
+#   - gemname1
+#   - name: gemname1
+#     verison: 1.0.0
+#     pre_release: False
+#     state: latest
+# @end
+ruby_global_gems: []
+
+...

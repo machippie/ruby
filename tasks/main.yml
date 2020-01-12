@@ -1,0 +1,48 @@
+# Standards: 0.1
+---
+- name: Fact ruby user
+  set_fact:
+    ruby_user: "{{ ruby_user | default(homebrew_user) | default(ansible_user_id) }}"
+  tags:
+    - ruby
+
+- name: Install required package
+  when: ruby_install
+  ignore_errors: True
+  homebrew_cask:
+    name: ruby
+    state: latest
+  become: "{{ (ruby_user != ansible_user_id) | bool }}"
+  become_user: "{{ ruby_user }}"
+  tags:
+    - ruby
+
+- name: Install user gems
+  loop: "{{ ruby_user_gems }}"
+  loop_control:
+    label: "{{ item.name | default(item) }}"
+  gem:
+    name: "{{ item.name | default(item) }}"
+    version: "{{ item.version | default(omit) }}"
+    pre_release: "{{ item.pre_release | default(False) }}"
+    user_install: True
+    state: "{{ item.pre_release | default('latest') }}"
+  become: "{{ (ruby_user != ansible_user_id) | bool }}"
+  become_user: "{{ ruby_user }}"
+  tags:
+    - ruby
+
+- name: Install global gems
+  loop: "{{ ruby_global_gems }}"
+  loop_control:
+    label: "{{ item.name | default(item) }}"
+  gem:
+    name: "{{ item.name | default(item) }}"
+    version: "{{ item.version | default(omit) }}"
+    pre_release: "{{ item.pre_release | default(False) }}"
+    user_install: False
+    state: "{{ item.pre_release | default('latest') }}"
+  tags:
+    - ruby
+
+...
