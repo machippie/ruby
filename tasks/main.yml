@@ -27,7 +27,7 @@
     version: "{{ item.version | default(omit) }}"
     pre_release: "{{ item.pre_release | default(False) }}"
     user_install: True
-    state: "{{ item.pre_release | default('latest') }}"
+    state: "{{ item.state | default('latest') }}"
   become: "{{ (ruby_user != ansible_user_id) | bool }}"
   become_user: "{{ ruby_user }}"
   tags:
@@ -43,7 +43,7 @@
     version: "{{ item.version | default(omit) }}"
     pre_release: "{{ item.pre_release | default(False) }}"
     user_install: False
-    state: "{{ item.pre_release | default('latest') }}"
+    state: "{{ item.state | default('latest') }}"
   tags:
     - ruby
 
